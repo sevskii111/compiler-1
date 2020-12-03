@@ -1,7 +1,6 @@
 from syntax.parser import Parser
 from syntax.draw import visit
 import json
-import pprint
 import pydot
 
 
@@ -54,7 +53,6 @@ while buff[-1].value != "PROGRAM":
     if lexem.line is not None:
         last_known_line = lexem.line
     last = buff[-1].value
-
     if (lexem.term not in control_table) or (last not in control_table[lexem.term]):
         raise Exception("Error in line: " + str(last_known_line))
     action = control_table[lexem.term][last]
@@ -73,7 +71,7 @@ while buff[-1].value != "PROGRAM":
 
 graph = pydot.Dot(graph_type='graph')
 visit(buff[-1], graph=graph)
-graph.write_png('tree.png')
+graph.write_png('attachment/tree.png')
 
 
 lex_file.close()
